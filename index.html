@@ -7,11 +7,42 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         .link-container { margin: 10px 0; }
-        a { text-decoration: none; color: blue; font-size: 18px; }
-        a:hover { text-decoration: underline; }
+        .button { 
+            display: inline-block; 
+            padding: 10px 20px; 
+            margin: 5px;
+            background-color: #007BFF; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button:hover { background-color: #0056b3; }
+        .download-section {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+        .download-section img {
+            width: 150px;
+            display: block;
+            margin: 10px auto;
+        }
     </style>
 </head>
 <body>
+    <div class="download-section">
+        <h3>앱 다운로드</h3>
+        <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.docs.editors.sheets" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" alt="Google Play Store">
+        </a>
+        <a href="https://apps.apple.com/app/google-sheets/id842849113" target="_blank">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+        </a>
+    </div>
+    
     <h2>구역별 스프레드시트 이동</h2>
     <div id="links"></div>
 
@@ -25,35 +56,20 @@
         areas.forEach(area => {
             const div = document.createElement("div");
             div.classList.add("link-container");
-            div.innerHTML = `<a href="${sheetUrl.replace("gid=0", `gid=${getGid(area)}`)}" target="_blank">${area} 이동</a>`;
+            div.innerHTML = `<a class="button" href="${sheetUrl.replace("gid=0", `gid=${getGid(area)}`)}" target="_blank">${area} 이동</a>`;
             linksDiv.appendChild(div);
         });
 
         function getGid(area) {
-    switch (area) {
-        case "11구역": return 396997134; //
-        case "12구역": return 1593202344; //
-        case "13구역": return 1984506026; //
-        case "14구역": return 1327914051; //
-        case "21구역": return 1926118862; //
-        case "22구역": return 2071693966; //
-        case "23구역": return 329402956; //
-        case "24구역": return 112435682; //
-        case "31구역": return 481331874; //
-        case "32구역": return 1553524851; //
-        case "33구역": return 1518880820; //
-        case "34구역": return 1934959593; //
-        case "41구역": return 521452141; //
-        case "42구역": return 1656018205; //
-        case "43구역": return 293280473; //
-        case "44구역": return 1556860253; //
-        case "51구역": return 786508486; //
-        case "52구역": return 1920099514; //
-        case "53구역": return 869821696; //
-        case "54구역": return 703456572; //
-        default: return 0;
-    }
-}
+            const gids = {
+                "11구역": 396997134, "12구역": 1593202344, "13구역": 1984506026, "14구역": 1327914051,
+                "21구역": 1926118862, "22구역": 2071693966, "23구역": 329402956, "24구역": 112435682,
+                "31구역": 481331874, "32구역": 1553524851, "33구역": 1518880820, "34구역": 1934959593,
+                "41구역": 521452141, "42구역": 1656018205, "43구역": 293280473, "44구역": 1556860253,
+                "51구역": 786508486, "52구역": 1920099514, "53구역": 869821696, "54구역": 703456572
+            };
+            return gids[area] || 0;
+        }
     </script>
 </body>
 </html>
