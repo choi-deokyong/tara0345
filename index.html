@@ -6,7 +6,7 @@
     <title>구역별 스프레드시트 이동</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; position: relative; }
-        .link-container { margin: 10px 0; }
+        .link-container { margin: 10px 0; display: inline-block; width: 45%; }
         .button { 
             display: inline-block; 
             padding: 10px 20px; 
@@ -19,19 +19,22 @@
         }
         .button:hover { background-color: #0056b3; }
         .download-section {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: center;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .download-section h3 {
+            margin-right: 10px;
         }
         .download-section img {
             width: 150px;
-            display: block;
-            margin: 10px auto;
+            margin-left: 10px;
         }
         #links {
-            margin-left: 50px; /* 구역 버튼을 오른쪽으로 이동 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
     </style>
 </head>
