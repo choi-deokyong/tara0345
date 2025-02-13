@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>구역별 스프레드시트 이동</title>
-</head>
-<body>
-    <div class="download-section">
-        <h3>앱 다운로드</h3>
-        <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.docs.editors.sheets" target="_blank" aria-label="Google Play Store에서 다운로드">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="">
-        </a>
-        <a href="https://apps.apple.com/app/google-sheets/id842849113" target="_blank" aria-label="App Store에서 다운로드">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="">
-        </a>
-    </div>
-
-    <h2>구역별 스프레드시트 이동</h2>
-    <div id="links"></div>
-
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js')
                 .then(reg => console.log('Service Worker Registered!', reg))
                 .catch(err => console.log('Service Worker registration failed: ', err));
         }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <a href="https://play.google.com/store/apps" target="_blank">
+            <img src="icons/google-play.png" alt="Google Play" width="150">
+        </a>
+        <a href="https://www.apple.com/app-store/" target="_blank">
+            <img src="icons/app-store.png" alt="App Store" width="150">
+        </a>
+    </div>
+    <h2>구역별 스프레드시트 이동</h2>
+    <div id="links"></div>
 
+    <script>
         const sheetUrl = "https://docs.google.com/spreadsheets/d/1yD3sPYsU3U-aBpLrQ62IFQK5WCb1Ut1ACNTnQEnQZOE/edit#gid=0";
-        const areas = ["11구역", "12구역", /* ... */];
+        const areas = ["11구역", "12구역", "13구역", "14구역", "21구역", "22구역", "23구역", "24구역",
+                        "31구역", "32구역", "33구역", "34구역", "41구역", "42구역", "43구역", "44구역",
+                        "51구역", "52구역", "53구역", "54구역"];
+
         const linksDiv = document.getElementById("links");
+        linksDiv.style.display = "grid";
+        linksDiv.style.gridTemplateColumns = "repeat(2, 1fr)";
+        linksDiv.style.gap = "10px";
+        linksDiv.style.maxWidth = "600px";
+        linksDiv.style.margin = "auto";
 
         areas.forEach(area => {
             const div = document.createElement("div");
             div.classList.add("link-container");
-            div.innerHTML = `<a class="button" href="${sheetUrl.replace("gid=0", `gid=${getGid(area)}`)}" target="_blank">${area} 이동</a>`;
+            div.innerHTML = `<a href="${sheetUrl.replace("gid=0", `gid=${getGid(area)}`)}" target="_blank">${area} 이동</a>`;
             linksDiv.appendChild(div);
         });
 
         function getGid(area) {
-            const gids = { /* ... */ };
-            if (gids[area]) {
-                return gids[area];
-            } else {
-                alert(`${area}에 해당하는 시트를 찾을 수 없습니다.`);
-                return;
+            switch (area) {
+                case "11구역": return 396997134;
+                case "12구역": return 1593202344;
+                case "13구역": return 1984506026;
+                case "14구역": return 1327914051;
+                case "21구역": return 1926118862;
+                case "22구역": return 2071693966;
+                case "23구역": return 329402956;
+                case "24구역": return 112435682;
+                case "31구역": return 481331874;
+                case "32구역": return 1553524851;
+                case "33구역": return 1518880820;
+                case "34구역": return 1934959593;
+                case "41구역": return 521452141;
+                case "42구역": return 1656018205;
+                case "43구역": return 293280473;
+                case "44구역": return 1556860253;
+                case "51구역": return 786508486;
+                case "52구역": return 1920099514;
+                case "53구역": return 869821696;
+                case "54구역": return 703456572;
+                default: return 0;
             }
         }
     </script>
